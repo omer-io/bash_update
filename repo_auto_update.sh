@@ -21,15 +21,13 @@ if [ -n "$changed_files" ]; then
             git add "$file"
         done
     fi
+    # read commit message from user
+    echo -e "\nEnter commit message: "
+    read commit_msg
+
+    # commit and push
+    git commit -m "$commit_msg"
+    git push origin main
 else
     echo -e "\nNo changes to commit"
 fi
-
-# read commit message from user
-echo -e "\nEnter commit message: "
-read commit_msg
-
-# add, commit and push
-git add .
-git commit -m "$commit_msg"
-git push origin main
