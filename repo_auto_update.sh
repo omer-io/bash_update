@@ -5,11 +5,11 @@
 #read repo_path
 #cd "$repo_path" || exit
 
-# print repo status
-echo -e "\nThese files are modified/untracked/deleted:\n"
+# check repo status
 changed_files=$(git status --porcelain | sed s/^...//)
 
 if [ -n "$changed_files" ]; then
+    echo -e "\nThese files are modified/untracked/deleted:\n"
     echo "$changed_files"
     echo -e "\nEnter file names to push seperated by space or press y to push all"
     read -r files
