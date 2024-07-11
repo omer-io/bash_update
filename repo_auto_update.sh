@@ -11,7 +11,7 @@ changed_files=$(git status --porcelain | sed s/^...//)
 
 if [ -n "$changed_files" ]; then
     echo "$changed_files"
-    echo -e "\nEnter file names to stage seperated by space or press y to stage all"
+    echo -e "\nEnter file names to push seperated by space or press y to push all"
     read -r files
 
     if [ "$files" == "y" ]; then
