@@ -6,15 +6,24 @@
 #cd "$repo_path" || exit
 
 # print repo status
-#echo -e "\nThese files are modified/untracked/deleted:\n"
-#changed_files=$(git status --porcelain | sed s/^...//)
-#echo "$changed_files"
+echo -e "\nThese files are modified/untracked/deleted:\n"
+changed_files=$(git status --porcelain | sed s/^...//)
 
-#wc -l "$changed_files"
+if [ -n "$changed_files" ]; then
+    echo "$changed_files"
+    echo -e "\nEnter file names to stage seperated by space or press y to stage all"
+    read -r files
 
-#echo -e "\nEnter file names to stage seperated by space or press y to stage all"
-#read files
-#echo "$files" | awk '{print $1, $2, $3}'
+    if [ "$files" == "y" ]; then
+        git add .
+    else
+        for file in $files; do
+            git add "$file"
+        done
+    fi
+else
+    echo -e "\nNo changes to commit"
+fi
 
 # read commit message from user
 echo -e "\nEnter commit message: "
