@@ -1,24 +1,29 @@
 #!/bin/bash
 
 # read local repo path from user
-#echo -e "\nEnter local repo path"
-#read repo_path
-#cd "$repo_path" || exit
+echo -e "\nEnter local repo path"
+read repo_path
+cd "$repo_path" || exit
 
 # check repo status
 changed_files=$(git status --porcelain | sed s/^...//)
 
+# condition to check if changes occurred
 if [ -n "$changed_files" ]; then
     echo -e "\nThese files are modified/untracked/deleted:\n"
     echo "$changed_files"
     echo -e "\nEnter file names to push seperated by space or press y to push all"
-    read -r files
+    read -r user_files
 
-    if [ "$files" == "y" ]; then
+    
+
+    #if input is y then add all
+    if [ "$user_files" == "y" ]; then
         git add .
+    #else add files entered by user
     else
-        for file in $files; do
-            git add "$file"
+        for filename in $user_files; do
+            git add "$filename"
         done
     fi
     # read commit message from user
