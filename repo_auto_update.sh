@@ -15,8 +15,6 @@ if [ -n "$changed_files" ]; then
     echo -e "\nEnter file names to push seperated by space or press y to push all"
     read -r user_files
 
-    
-
     #if input is y then add all
     if [ "$user_files" == "y" ]; then
         git add .
@@ -36,3 +34,4 @@ if [ -n "$changed_files" ]; then
 else
     echo -e "\nNo changes to commit"
 fi
+echo "hello"
